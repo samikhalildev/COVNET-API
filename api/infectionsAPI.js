@@ -16,19 +16,30 @@ router.post('/infectedId', (req, res) => {
     let { infectedId } = req.body;
 
     if (infectedId.trim().length > 0) {
-        const newInfection = new Infection({
-            uniqueId: infectedId,
-            coords: []
-        });
+        Infection.findOne({ uniqueId: infectedId }) 
+            .then(found => {
+                if (!found) {
+                    const newInfection = new Infection({
+                        uniqueId: infectedId,
+                        coords: []
+                    });
+            
+                    newInfection.save()
+                        .then(() => res.status(200).json({ success: true }))
+                        .catch(err => res.status(400).json({ err: 'User already added as infected' }))
+                } else {
+                    res.status(400).json({ err: 'User already added as infected' })
+                }
 
-        newInfection.save()
-            .then(() => res.status(200).json({ success: true }))
-            .catch(err => res.status(400).json({ err: 'User already added as infected' }))
+            }).catch(err => {
+                console.log(err);
+                return res.status(400).json({ err: 'Could not add ID' });
+            })
+        
     } else {
         res.status(400).json({ err: 'Please enter a valid ID' })
     }
 });
-
 
 // Add infected user location, this will be called from mobile app to send infected user locations
 router.post('/', (req, res) => {
