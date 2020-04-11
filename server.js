@@ -1,11 +1,15 @@
 const express = require("express");
 const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
-var cors = require('cors')
+const cors = require('cors')
+const path = require('path')
 
 const app = express();
 
 const infections_api = require('./api/infectionsAPI');
+
+let portal_path = path.join(__dirname, 'web')
+app.use('/portal', express.static(portal_path))
 
 // Body parser middleware
 app.use(cors())
@@ -17,6 +21,10 @@ const db_URI = process.env.MONGODB_URI || "mongodb://localhost/covid";
 mongoose.connect(db_URI, { useNewUrlParser: true })
     .then(() => console.log('Mongodb connected'))
     .catch(err => console.log('Mongodb error:', err));
+
+app.get('/portal', (req, res) => {
+    res.sendFile(path.join(portal_path, 'SubmitCase.html'))
+})
 
 app.use('/api/infections', infections_api);
 

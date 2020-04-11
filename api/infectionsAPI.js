@@ -14,10 +14,12 @@ router.get('/', (req, res) => {
 // This will be called from a web page which will listen for ids and create a new infected user record
 router.post('/infectedId', (req, res) => {
     let { infectedId } = req.body;
+    console.log(req.body);
 
-    if (infectedId.trim().length > 0) {
+    if (infectedId != undefined && infectedId != null && infectedId.trim().length > 0) {
         Infection.findOne({ uniqueId: infectedId }) 
             .then(found => {
+                
                 if (!found) {
                     const newInfection = new Infection({
                         uniqueId: infectedId,
@@ -28,7 +30,7 @@ router.post('/infectedId', (req, res) => {
                         .then(() => res.status(200).json({ success: true }))
                         .catch(err => res.status(400).json({ err: 'User already added as infected' }))
                 } else {
-                    res.status(400).json({ err: 'User already added as infected' })
+                    res.status(400).json({ err: 'User has already been added as infected' })
                 }
 
             }).catch(err => {
@@ -40,6 +42,7 @@ router.post('/infectedId', (req, res) => {
         res.status(400).json({ err: 'Please enter a valid ID' })
     }
 });
+
 
 // Add infected user location, this will be called from mobile app to send infected user locations
 router.post('/', (req, res) => {
