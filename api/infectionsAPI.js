@@ -1,6 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const Infection = require('../model/infections');
+const isEmpty = require('../helpers/isEmpty');
 
 // Return all infected locations
 router.get('/', (req, res) => {
@@ -14,9 +15,8 @@ router.get('/', (req, res) => {
 // This will be called from a web page which will listen for ids and create a new infected user record
 router.post('/infectedId', (req, res) => {
     let { infectedId } = req.body;
-    console.log(req.body);
 
-    if (infectedId != undefined && infectedId != null && infectedId.trim().length > 0) {
+    if (!isEmpty(infectedId) && infectedId.trim().length > 0) {
         Infection.findOne({ uniqueId: infectedId }) 
             .then(found => {
                 
@@ -50,7 +50,7 @@ router.post('/', (req, res) => {
     console.log(uniqueId)
     console.log(coords)
 
-    if (coords.length > 0) {
+    if (!isEmpty(coords) && coords.length > 0) {
         Infection.findOne({ uniqueId })
             .then(infection => {
                 if (infection) {

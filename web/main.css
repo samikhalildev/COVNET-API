@@ -50,6 +50,10 @@ body {
   background-color: rgb(10, 120, 245);
 }
 
+input {
+  width: 400px;
+}
+
 .dropdown-content {
   display: none;
   position: absolute;
