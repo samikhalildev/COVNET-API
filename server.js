@@ -22,6 +22,10 @@ mongoose.connect(db_URI, { useNewUrlParser: true })
     .then(() => console.log('Mongodb connected'))
     .catch(err => console.log('Mongodb error:', err));
 
+app.get('/', (req, res) => {
+    res.sendFile(path.join(portal_path, 'landing.html'))
+})
+
 app.get('/portal', (req, res) => {
     res.sendFile(path.join(portal_path, 'SubmitCase.html'))
 })

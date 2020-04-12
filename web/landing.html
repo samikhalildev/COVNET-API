@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+
+    <title>COVNET</title>
+    <style>
+        .header {
+            margin-top: 35px;
+            margin-bottom: 35px;
+            padding: 5px;
+        }
+
+        h1 {
+        }
+
+        .footer {
+            margin-top: 25px;
+            margin-bottom: 100px;
+        }
+        
+        .row {
+            margin-top: 25px;
+        }
+
+    </style>
+  </head>
+  <body style="background-color: #eee;">
+    <div class="container">
+        <div class="row">
+            <div class="col">
+                <div class="header">
+                    <h1>COVNET</h1>
+                    <span>Track and inform the user's visited places and notifies you of close proximity of other user's with a confirmed case of the virus!</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col">
+                <div class="demo">
+                    <video width="300" autoplay>
+                        <source src="./portal/demo.mov" type="video/mp4">
+                    </video>
+                </div>
+            </div>
+        </div>
+        
+        <div class="row">
+            <div class="col">
+                <h3>Inspiration</h3>
+                <p>
+                    The rapid transmission of the coronavirus (COVID-19) has led to a sudden lack of information of whether or not a user has crossed paths with a COVID-19 case: have they become infected with the virus or have they become a carrier for it? So we decided to make an app that tracks this kind of information anonymously.
+                </p>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col">
+                <h3>What it does </h3>
+                <p>
+                    COVNET, informs users who have been in close contact with a COVID-19 case. The app helps health personnels trace contacts of a confirmed case and allow them to get a better idea of who is most likely to get infected.
+                </p>
+                <p>
+                    The app will ask for permission to access the user’s location data and will track their location anonymously every 5 minutes. Each user will be assigned an ID to distinguish them from other users. If a user test positive, they have the option to send their ID to the health personnel. The health personnel will have access to a portal where they can sign in and enter the ID of the infected user to let the system know that they have tested positive. The server will receive the submissions and captures the infected user's location data for the past 2 weeks from the device. All users in the same city will receive the infected locations and will notify the user if they came in close contact with the confirmed case (between 2 hours of contact and within 30 meters).
+                </p>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col">
+                <h3> How we built it </h3>
+                <p>
+                    - React Native is used as the main development framework for both IOS and Android. </br>
+                    - Node.js is used as an API gateway to communicate between the client (mobile and web) and database. </br>
+                    - Mongodb Atlas is used to host and store the infected cases in the cloud. </br>
+                </p>
+            </div>  
+        </div>
+
+        <div class="row">
+            <div class="col">
+                <h3> What's next for COVNET </h3>
+                <p>
+                    - Show infected locations on the dashboard and users who have been in close contact. </br>
+                    - Publish to IOS and Android store. </br>
+                    - Get in touch with health personnels to test the app. </br>
+                </p>
+            </div>  
+        </div>
+
+        <div class="row">
+            <div class="col">
+                <h3> Try it out </h3>
+                <a href="https://github.com/samikhalildev/COVNET" target=”_blank” class="btn btn-info mt" role="button">App Repo</a> 
+                <a href="https://github.com/samikhalildev/COVNET-API" target=”_blank” class="btn btn-info mt" role="button">Server Repo</a>
+                <a href="/api/infections" class="btn btn-secondary mt" target=”_blank” role="button">API</a>
+                <a href="/portal" class="btn btn-secondary mt" target=”_blank” role="button">Portal</a>
+            </div>  
+        </div>
+        
+        <div class="row">
+            <div class="col footer">
+                <h3> Contact </h3>
+                <div class="">
+                    <a href="mailto:sami.khalil.dev@gmail.com?Subject=COVNET" class="btn btn-danger mt" role="button" target="_top">Send email</a>
+                </div>
+            </div>  
+        </div>
+    </div>
+  </body>
+</html>
