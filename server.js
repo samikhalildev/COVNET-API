@@ -23,7 +23,12 @@ mongoose.connect(db_URI, { useNewUrlParser: true })
     .catch(err => console.log('Mongodb error:', err));
 
 app.get('/', (req, res) => {
-    res.sendFile(path.join(portal_path, 'landing.html'))
+    if (req.hostname.includes('heroku')) {
+        console.log('hostname', req.hostname);
+        res.redirect('https://covnet.tech/');
+    } else {
+        res.sendFile(path.join(portal_path, 'landing.html'))
+    }
 })
 
 app.get('/portal', (req, res) => {
