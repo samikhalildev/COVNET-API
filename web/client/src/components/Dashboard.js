@@ -74,7 +74,11 @@ class Search extends Component {
                                 
                                 <p> {!isEmpty(infection.dateTested) && `Tested ${Moment(infection.dateTested).fromNow()}`} {!isEmpty(infection.dateInfected) && `Infected ${Moment(infection.dateInfected).fromNow()}`} </p>
 
-                                {infection.contacts.length ? <p className="">Has been in close contact with {infection.contacts.length} other users</p> : 'No close contact with anyone close'}
+                                {infection.coords.length ? (
+                                    <p>
+                                        Location received. {infection.contacts.length ? `${infection.firstName} has been in close contact with ${infection.contacts.length} other users` : 'No close contact with anyone close'}
+                                    </p>
+                                ): null}
                              </li> 
                         })}
                     </ul>

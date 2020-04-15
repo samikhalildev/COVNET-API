@@ -88,34 +88,44 @@ router.post('/', (req, res) => {
     let { uniqueId, coords, city } = req.body;
     console.log(uniqueId)
     console.log(coords)
+    let alreadyAddedToCity = false;
 
     if (!isEmpty(coords) && coords.length > 0) {
         Infection.findOne({ uniqueId })
             .then(infection => {
                 if (infection) {
+                    
+                    if (infection.coords && infection.coords.length)
+                        alreadyAddedToCity = true;
+
                     infection.coords = coords;
+
                     if (!infection.city)
                         infection.city = city;
                     // infection.infectedTimes = infection.infectedTimes ? infection.infectedTimes + 1 : 1;
                     infection.save()
                         .then(() => {
-                            City.findOne({ name: infection.city })
-                                .then(foundCity => {
-                                    if (foundCity) {
-                                        console.log('city found')
-                                        foundCity.infections.push(infection._id);
-                                        foundCity.save();
-                                    } else {
-                                        const newCity = new City({
-                                            name: city
-                                        });
-                                        console.log('new city')
+                            if (!alreadyAddedToCity) {
+                                City.findOne({ name: infection.city })
+                                    .then(foundCity => {
+                                        if (foundCity) {
+                                            console.log('city found')
+                                            foundCity.infections.push(infection._id);
+                                            foundCity.save();
+                                        } else {
+                                            const newCity = new City({
+                                                name: city
+                                            });
+                                            console.log('new city')
 
-                                        newCity.infections.push(infection._id);
-                                        newCity.save();
-                                    }
-                                    res.status(200).json({ success: true });
-                                })
+                                            newCity.infections.push(infection._id);
+                                            newCity.save();
+                                        }
+                                        res.status(200).json({ success: true });
+                                    })
+                            } else {
+                                res.status(200).json({ success: true });
+                            }
                         })
                         .catch(err => res.status(400).json({ err }))
                 } else {
