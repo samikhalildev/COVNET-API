@@ -3,25 +3,38 @@ const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
 const cors = require('cors')
 const path = require('path')
+const passport = require('passport');
 
 const app = express();
 
-const infections_api = require('./api/infectionsAPI');
+const authApi = require('./api/auth');
+const infectionsApi = require('./api/infections');
 
 let portal_path = path.join(__dirname, 'web')
 app.use('/portal', express.static(portal_path))
+
+// DB
+const { database, port } = require('./config/config');
+
+// Connect to MongoDB
+mongoose
+  .connect(database, { useNewUrlParser: true })
+  .then(() => console.log('Mongodb connected'))
+  .catch(err => console.log('Mongodb error:', err));
+
 
 // Body parser middleware
 app.use(cors())
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 
-const db_URI = process.env.MONGODB_URI || "mongodb://localhost/covid";
+// Passport middleware
+app.use(passport.initialize());
 
-mongoose.connect(db_URI, { useNewUrlParser: true })
-    .then(() => console.log('Mongodb connected'))
-    .catch(err => console.log('Mongodb error:', err));
+// Passport Config
+require('./config/passport')(passport);
 
+// Routing
 app.get('/', (req, res) => {
     if (req.hostname.includes('heroku')) {
         console.log('hostname', req.hostname);
@@ -35,7 +48,18 @@ app.get('/portal', (req, res) => {
     res.sendFile(path.join(portal_path, 'SubmitCase.html'))
 })
 
-app.use('/api/infections', infections_api);
+app.use('/api/auth', authApi);
+app.use('/api/infections', infectionsApi);
 
-app.set('port', process.env.PORT || 5000);
-app.listen(app.get('port'), () => console.log(`Server running on ${app.get('port')}`));
+
+// Serve static assets if in production
+if (process.env.NODE_ENV === 'production') {
+    // Set static folder
+    app.use(express.static('web/client/build'));
+  
+    app.get('*', (req, res) => {
+      res.sendFile(path.resolve(__dirname, 'web/client', 'build', 'index.html'));
+    });
+}
+  
+app.listen(port, () => console.log(`Server running on ${port}`));
