@@ -5,14 +5,14 @@ import jwt_decode from 'jwt-decode';
 // Action types
 import { SET_CURRENT_USER } from "./types";
 import { GET_ERRORS } from "./types";
-
+import host from '../config/api';
 
 // Actions gets called from component props which they call reducers to change the state of the data
 
 // Register
 export const accessUser = (userData, history) => dispatch => {
     axios
-        .post('http://localhost:5000/api/auth', userData)
+        .post(host + '/api/auth', userData)
         .then(res => {
             console.log(res);
 
@@ -50,7 +50,7 @@ export const accessUser = (userData, history) => dispatch => {
 // Login - Get User Token
 export const loginUser = (userData) => dispatch => {
     axios
-        .post('/api/account', userData)
+        .post(host + '/api/account', userData)
         .then(res => {
 
             // Once we get the response back, save to LocalStorage

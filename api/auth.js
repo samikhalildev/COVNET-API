@@ -7,6 +7,7 @@ const passport = require('passport');
 const HealthProfessional = require('../model/HealthProfessional');
 const City = require('../model/City');
 const validateLogin = require('../helpers/validateLogin');
+const isEmpty = require('../helpers/isEmpty');
 
 router.post('/', (req, res) => {
   
@@ -49,6 +50,11 @@ router.post('/', (req, res) => {
 
       } else {
 
+        if (isEmpty(req.body.city)) {
+          res.status(400).json({ email: 'Incorrect details' });
+          return false;
+        }
+
         let { city } = req.body;
         city = city.substring(0, 1).toUpperCase() + city.substring(1);
         console.log(city);
@@ -68,13 +74,13 @@ router.post('/', (req, res) => {
               newCity.save().then(city => {
                 console.log(city._id);
                 createUser(req, res, city);
-              });
+              })
+              .catch(err => console.log(err));
             }
           })
           .catch(err => {
             console.log('err', err);
           })
-
     }
   });
 });

@@ -10,8 +10,7 @@ const app = express();
 const authApi = require('./api/auth');
 const infectionsApi = require('./api/infections');
 
-let portal_path = path.join(__dirname, 'web')
-app.use('/portal', express.static(portal_path))
+let web_path = path.join(__dirname, 'web')
 
 // DB
 const { database, port } = require('./config/config');
@@ -40,26 +39,27 @@ app.get('/', (req, res) => {
         console.log('hostname', req.hostname);
         res.redirect('https://covnet.tech/');
     } else {
-        res.sendFile(path.join(portal_path, 'landing.html'))
+        res.sendFile(path.join(web_path, 'landing.html'))
     }
 })
 
-app.get('/portal', (req, res) => {
-    res.sendFile(path.join(portal_path, 'SubmitCase.html'))
-})
+// app.get('/portal', (req, res) => {
+//     res.sendFile(path.join(web_path, 'SubmitCase.html'))
+// })
 
 app.use('/api/auth', authApi);
 app.use('/api/infections', infectionsApi);
 
 
 // Serve static assets if in production
-if (process.env.NODE_ENV === 'production') {
-    // Set static folder
-    app.use(express.static('web/client/build'));
-  
-    app.get('*', (req, res) => {
-      res.sendFile(path.resolve(__dirname, 'web/client', 'build', 'index.html'));
-    });
-}
+// if (process.env.NODE_ENV === 'production') {
+
+// Set static folder
+app.use(express.static(path.join(web_path, 'client/build')));
+
+app.get('*', (req, res) => {
+    res.sendFile(path.resolve(web_path, 'client', 'build', 'index.html'));
+});
+// }
   
 app.listen(port, () => console.log(`Server running on ${port}`));

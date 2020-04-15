@@ -11,8 +11,9 @@ import { getContent } from "../actions/contentActions";
 import isEmpty from '../utils/is-empty';
 import Spinner from './layout/Spinner';
 import Moment from 'moment';
+import host from '../config/api';
 
-const API = 'http://localhost:5000/api/infections';
+const API = host + '/api/infections';
 
 class Search extends Component {
 
@@ -80,7 +81,7 @@ class Search extends Component {
                 </div>
             );
         } else {
-            infectionsHTML = <h3>You haven't added any users, <Link to='/add'>add a person here</Link></h3>
+            infectionsHTML = <h3>You haven't added any users, <Link to='/add'>add a user here</Link></h3>
         }
        
         return <>

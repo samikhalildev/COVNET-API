@@ -7,6 +7,7 @@ import axios from 'axios';
 
 import '../styles/main.css';
 import isEmpty from '../utils/is-empty';
+import host from '../config/api';
 
 class NewCase extends Component {
 
@@ -67,7 +68,7 @@ class NewCase extends Component {
 
         console.log(newCase)
 
-        axios.post('http://localhost:5000/api/infections/infectedId', newCase)
+        axios.post(host + '/api/infections/infectedId', newCase)
             .then(res => {
                 console.log(res);
                 if (res.data.success) {
