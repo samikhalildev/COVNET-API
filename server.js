@@ -33,16 +33,10 @@ app.use(passport.initialize());
 // Passport Config
 require('./config/passport')(passport);
 
-app.get("*", (req, res) => {
-    if (req.hostname.includes('heroku')) {
-        res.redirect('https://covnet.tech' + req.url);
-    }
-});
-
 // Routing
 app.get('/', (req, res) => {
-    if (req.protocol == 'http') {
-        res.redirect("https://covnet.tech" + req.url);
+    if (req.hostname.includes('heroku') || req.protocol === 'http') {
+        res.redirect('https://covnet.tech' + req.url);
     } else {
         res.sendFile(path.resolve(__dirname, 'web', 'landing.html'))
     }
