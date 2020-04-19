@@ -39,7 +39,7 @@ app.get('/', (req, res) => {
         console.log('hostname', req.hostname);
         res.redirect('https://covnet.tech/');
     } else {
-        res.sendFile(path.join(web_path, 'landing.html'))
+        res.sendFile(path.resolve(__dirname, 'web', 'landing.html'))
     }
 })
 
@@ -55,10 +55,11 @@ app.use('/api/users', infectionsApi);
 // if (process.env.NODE_ENV === 'production') {
 
 // Set static folder
-app.use(express.static(path.join(web_path, 'client/build')));
+app.use(express.static(path.join(__dirname, 'web')));
+app.use(express.static(path.join(__dirname, 'web/client/build')));
 
 app.get('*', (req, res) => {
-    res.sendFile(path.resolve(web_path, 'client', 'build', 'index.html'));
+    res.sendFile(path.resolve(__dirname, 'web', 'client', 'build', 'index.html'));
 });
 // }
   

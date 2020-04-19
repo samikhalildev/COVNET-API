@@ -6,7 +6,9 @@
 
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
 
-    <title>COVNET</title>
+    <title> COVNET - An anonymous contact tracing system </title>
+    <meta name="Description" CONTENT="Covnet informs you if you have been in close contact with another user who have been diagnosed with the virus to help you get tested early and self-isolate to avoid further spread.">
+
     <style>
         .header {
             margin-top: 35px;
@@ -22,7 +24,12 @@
         .row {
             margin-top: 25px;
         }
-
+        .img {
+            width: 200px;
+        }
+        .mt {
+            margin-bottom: 50px;
+        }
     </style>
   </head>
   <body style="background-color: #eee;">
@@ -31,7 +38,7 @@
             <div class="col">
                 <div class="header">
                     <h1>COVNET</h1>
-                    <span>Track and inform the user's visited places and notifies you of close proximity of other user's with a confirmed case of the virus!</span>
+                    <span>An anonymous contact tracing system</span>
                 </div>
             </div>
         </div>
@@ -39,9 +46,11 @@
         <div class="row">
             <div class="col">
                 <div class="demo">
-                    <video width="300" autoplay>
-                        <source src="./portal/demo.mov" type="video/mp4">
-                    </video>
+                    <img class="img" src="/imgs/2.png"/>
+                    <img class="img" src="/imgs/3.png"/>
+                    <img class="img" src="/imgs/4.png"/>
+                    <img class="img" src="/imgs/5.png"/>
+                    <img class="img" src="/imgs/6.png"/>
                 </div>
             </div>
         </div>
@@ -50,7 +59,7 @@
             <div class="col">
                 <h3>Inspiration</h3>
                 <p>
-                    The rapid transmission of the coronavirus (COVID-19) has led to a sudden lack of information of whether or not a user has crossed paths with a COVID-19 case: have they become infected with the virus or have they become a carrier for it? So we decided to make an app that tracks this kind of information anonymously.
+                    The rapid transmission of the coronavirus COVID-19 has led to a sudden lack of information of whether or not a user has been in close contact with a COVID-19 case; have they become infected with the virus or have they become a carrier for it? So we decided to make an app that tracks this kind of information anonymously.
                 </p>
             </div>
         </div>
@@ -59,37 +68,25 @@
             <div class="col">
                 <h3>What it does </h3>
                 <p>
-                    COVNET, informs users who have been in close contact with a COVID-19 case. The app helps health personnels trace contacts of a confirmed case and allow them to get a better idea of who is most likely to get infected.
+                    It informs you if you have been in close contact with another user who have been diagnosed with the virus to help you get tested early and self-isolate to avoid further spread.</p>
+                <p>
+                    How does the app know who has the virus? The app uses GPS to record your location data (anonymously), all the data is stored within your device. If a person gets tested positive, they have the option to provide their <u>unique identification number</u> to the health authorities to let the system know that they have tested positive. Again this is anonymous, we have no idea who they were. 
                 </p>
                 <p>
-                    The app will ask for permission to access the user’s location data and will track their location anonymously every 5 minutes. Each user will be assigned an ID to distinguish them from other users. If a user test positive, they have the option to send their ID to the health personnel. The health personnel will have access to a portal where they can sign in and enter the ID of the infected user to let the system know that they have tested positive. The server will receive the submissions and captures the infected user's location data for the past 2 weeks from the device. All users in the same city will receive the infected locations and will notify the user if they came in close contact with the confirmed case (between 2 hours of contact and within 30 meters).
+                    The system will then capture the infected user location data from the past 2 weeks to use for contact tracing. Users who were in close contact with the infected case will get notifed and be able to view when and where it happened.
                 </p>
             </div>
         </div>
 
-        <div class="row">
-            <div class="col">
-                <h3> How we built it </h3>
-                <p>
-                    - React Native is used as the main development framework for both IOS and Android. </br>
-                    - Node.js is used as an API gateway to communicate between the client (mobile and web) and database. </br>
-                    - Mongodb Atlas is used to host and store the infected cases in the cloud. </br>
-                </p>
-            </div>  
-        </div>
-
-        <div class="row">
+        <div class="row mt">
             <div class="col">
                 <h3> Try it out </h3>
-                <a href="https://github.com/samikhalildev/COVNET" target=”_blank” class="btn btn-info mt" role="button">Github Repo</a> 
-                <a href="/portal" class="btn btn-secondary mt" target=”_blank” role="button">Portal</a>
-            </div>  
-        </div>
-        
-        <div class="row">
-            <div class="col footer">
-                <h3> Contact </h3>
+                <span>The app is built for both IOS and Android and is currently being tested.</span>
+                <br/> <br/>
+                <a href="https://github.com/samikhalildev/COVNET" target=”_blank” class="btn btn-info mt" role="button">Project</a> 
                 <a href="mailto:sami.khalil.dev@gmail.com?Subject=Covnet" class="btn btn-danger mt" role="button" target="_top">Send email</a>
+
+                <!--<a href="/portal" class="btn btn-secondary mt" target=”_blank” role="button">Portal</a> -->
             </div>  
         </div>
     </div>
