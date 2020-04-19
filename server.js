@@ -48,7 +48,7 @@ app.get('/', (req, res) => {
 // })
 
 app.use('/api/auth', authApi);
-app.use('/api/infections', infectionsApi);
+app.use('/api/users', infectionsApi);
 
 
 // Serve static assets if in production

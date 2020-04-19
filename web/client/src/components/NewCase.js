@@ -68,11 +68,11 @@ class NewCase extends Component {
 
         console.log(newCase)
 
-        axios.post(host + '/api/infections/infectedId', newCase)
+        axios.post(host + '/api/users/confirmed-case', newCase)
             .then(res => {
                 console.log(res);
                 if (res.data.success) {
-                    this.props.history.push('/')
+                    this.props.history.push('/portal')
                 }
             })
             .catch(err => {

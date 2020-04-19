@@ -33,7 +33,7 @@ export const accessUser = (userData, history) => dispatch => {
             // Set current user
             dispatch(setCurrentUser(decoded));
 
-            history.push('/');
+            history.push('/portal');
         })
         .catch(err =>
             {

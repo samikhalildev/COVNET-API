@@ -13,7 +13,7 @@ import Spinner from './layout/Spinner';
 import Moment from 'moment';
 import host from '../config/api';
 
-const API = host + '/api/infections';
+const API = host + '/api/users';
 
 class Search extends Component {
 
@@ -32,9 +32,9 @@ class Search extends Component {
     }
 
     getInfections = () => {
-        axios.get(API + '/infectionsTestedByMe')
+        axios.get(API + '/tested-by-me')
             .then(res => {
-                if (res.data.success) {
+                if (res && res.data && res.data.success) {
                     this.setState({ infections: res.data.infections, city: res.data.city }, () => this.getConfirmedCases());
                 }
             })
@@ -54,6 +54,27 @@ class Search extends Component {
         this.setState({ confirmedCases, loading: false });
     }
 
+    markAsInfected = (userId, i) => {
+        let {infections} = this.state;
+        let data = {
+            infectedId: userId,
+            status: 'infected'
+        }
+        axios.post(API + '/confirmed-case', data)
+            .then(res => {
+                console.log(res);
+                if (res.data.success) {
+                    infections[i].status = 'infected'
+                    this.setState({infections})
+                }
+            })
+            .catch(err => {
+                if (err && err.response && err.response.data) {
+                    console.log(err.response.data)
+                }
+            })
+    }
+
     render() {
         const { loading, city, infections, confirmedCases } = this.state;
 
@@ -68,17 +89,19 @@ class Search extends Component {
                     <h3>Hi {this.props.auth.user.name}, you have tested {infections.length} patients in {city}</h3>
                     <span>{confirmedCases.length} confirmed cases and {infections.length - confirmedCases.length} un-confirmed.</span>
                     <ul className="list-group mmt">
-                        { infections.map(infection => {
-                            return <li className="list-group-item"> ID: {infection.uniqueId}
-                                <p> Info: {infection.firstName} {infection.lastName} {infection.email} {infection.phone} {infection.age ? `, age: {infection.age}` : null} </p>
+                        { infections.map((user, i) => {
+                            return <li className="list-group-item"> ID: {user._id}
+                                <p> Info: {user.firstName} {user.lastName} {user.email} {user.phone} {user.age ? `, age: ${user.age}` : null} </p>
                                 
-                                <p> {!isEmpty(infection.dateTested) && `Tested ${Moment(infection.dateTested).fromNow()}`} {!isEmpty(infection.dateInfected) && `Infected ${Moment(infection.dateInfected).fromNow()}`} </p>
+                                <p> {!isEmpty(user.dateTested) && `Tested ${Moment(user.dateTested).fromNow()}`} {!isEmpty(user.dateInfected) && `Infected ${Moment(user.dateInfected).fromNow()}`} </p>
 
-                                {infection.coords.length ? (
+                                {user.coords.length ? (
                                     <p>
-                                        Location received. {infection.contacts.length ? `${infection.firstName} has been in close contact with ${infection.contacts.length} other users` : 'No close contact with anyone close'}
+                                        Location received. {user.contacts.length ? `${user.firstName} has been in close contact with ${user.contacts.length} other users` : 'No close contact with anyone close'}
                                     </p>
-                                ): null}
+                                ) : user.status == 'tested' ? (
+                                    <button onClick={() => this.markAsInfected(user._id, i)} className="btn btn-danger"> {`Mark as infected`} </button>
+                                ) : null }
                              </li> 
                         })}
                     </ul>

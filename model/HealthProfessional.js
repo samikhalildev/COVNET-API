@@ -44,7 +44,7 @@ const HealthProfessionalSchema = new Schema({
     infections: [
         {
           type: Schema.Types.ObjectId,
-          ref: 'infections'
+          ref: 'users'
         }
     ]
 });

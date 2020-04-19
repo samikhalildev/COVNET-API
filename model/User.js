@@ -2,13 +2,7 @@ const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
 // Create Schema
-const InfectionSchema = new Schema ({
-    
-    uniqueId: {
-        type: String,
-        required: true,
-        unique: true
-    },
+const UserSchema = new Schema ({
 
     // infected, tested, crossedPaths
     status: {
@@ -92,4 +86,4 @@ const InfectionSchema = new Schema ({
     ]
 });
 
-module.exports = Infection = mongoose.model('infections', InfectionSchema);
+module.exports = User = mongoose.model('users', UserSchema);
