@@ -12,7 +12,13 @@ import isEmpty from '../utils/is-empty';
 import Spinner from './layout/Spinner';
 import Moment from 'moment';
 import host from '../config/api';
-
+import MapInterface from './MapInterface'
+import formatDate from '../utils/formatDate'
+import {
+    withGoogleMap,
+    withScriptjs
+  } from "react-google-maps";
+  
 const API = host + '/api/users';
 
 class Search extends Component {
@@ -23,7 +29,8 @@ class Search extends Component {
             city: '',
             loading: true,
             infections: [],
-            confirmedCases: []
+            confirmedCases: [],
+            MapWrapped: null
         }
     }
 
@@ -39,7 +46,7 @@ class Search extends Component {
                 }
             })
             .catch(err => {
-                console.log(err.response.data)
+                console.log(err)
             })
     }
 
@@ -90,15 +97,32 @@ class Search extends Component {
                     <span>{confirmedCases.length} confirmed cases and {infections.length - confirmedCases.length} un-confirmed.</span>
                     <ul className="list-group mmt">
                         { infections.map((user, i) => {
+                            const MapWrapper = user.coords.length ? withScriptjs(withGoogleMap(MapInterface(user))) : null
+
                             return <li className="list-group-item"> ID: {user._id}
                                 <p> Info: {user.firstName} {user.lastName} {user.email} {user.phone} {user.age ? `, age: ${user.age}` : null} </p>
                                 
                                 <p> {!isEmpty(user.dateTested) && `Tested ${Moment(user.dateTested).fromNow()}`} {!isEmpty(user.dateInfected) && `Infected ${Moment(user.dateInfected).fromNow()}`} </p>
 
                                 {user.coords.length ? (
-                                    <p>
-                                        Location received. {user.contacts.length ? `${user.firstName} has been in close contact with ${user.contacts.length} other users` : 'No close contact with anyone close'}
-                                    </p>
+                                    <>
+                                        <p> {user.coords.length} locations received: </p>
+                                        <ul>
+                                        { user.coords.map(coord =>  <li>{coord.timestamp}: {coord.latitude}, {coord.longitude}</li> )}
+                                        {/* <div style={{ width: "100vw", height: "100vh" }}>
+                                            <MapWrapper
+                                                googleMapURL={`https://maps.googleapis.com/maps/api/js?v=3.exp&libraries=geometry,drawing,places&key=${process.env.GOOGLE_API}`}
+                                                loadingElement={<div style={{ height: `100%` }} />}
+                                                containerElement={<div style={{ height: `100%` }} />}
+                                                mapElement={<div style={{ height: `100%` }} />}
+                                            />
+                                        </div> */}
+                                        </ul>
+                                        <br/>
+                                        <p>
+                                            {user.contacts.length ? `${user.firstName} has been in close contact with ${user.contacts.length} other users` : 'No close contact with anyone close'}
+                                        </p>
+                                    </>
                                 ) : user.status == 'tested' ? (
                                     <button onClick={() => this.markAsInfected(user._id, i)} className="btn btn-danger"> {`Mark as infected`} </button>
                                 ) : null }
