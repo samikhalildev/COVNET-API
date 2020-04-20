@@ -108,7 +108,7 @@ class Search extends Component {
                                     <>
                                         <p> {user.coords.length} locations received: </p>
                                         <ul>
-                                        { user.coords.map(coord =>  <li>{coord.timestamp}: {coord.latitude}, {coord.longitude}</li> )}
+                                        { user.coords.map(coord =>  <li>{formatDate(coord.timestamp)}: {coord.latitude}, {coord.longitude}</li> )}
                                         {/* <div style={{ width: "100vw", height: "100vh" }}>
                                             <MapWrapper
                                                 googleMapURL={`https://maps.googleapis.com/maps/api/js?v=3.exp&libraries=geometry,drawing,places&key=${process.env.GOOGLE_API}`}
