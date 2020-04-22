@@ -127,15 +127,15 @@ router.post('/infected/locations', (req, res) => {
                                 res.status(200).json({ success: true });
                             }
                         })
-                        .catch(err => res.json({ err }))
+                        .catch(err => res.status(400).json({ err }))
                 } else {
                     console.log('Invalid ID');
-                    res.json({ err: "Invalid ID" })
+                    res.status(400).json({ err: "Invalid ID" })
                 }
 
-            }).catch(err => res.json({ err: 'Invalid ID' }))
+            }).catch(err => res.status(400).json({ err: 'Invalid ID' }))
     } else {
-        res.json({ success: false, err: 'Invalid user ID' })
+        res.status(400).json({ success: false, err: 'Invalid user ID' })
     }
 });
 
@@ -219,7 +219,7 @@ router.get('/infected/:city', (req, res) => {
             console.log(city.infections)
             res.status(200).json({ success: true, infections: city.infections })
         })
-        .catch(err => res.json({ err: 'City not found' }))
+        .catch(err => res.status(400).json({ err: 'City not found' }))
 });
 
 
