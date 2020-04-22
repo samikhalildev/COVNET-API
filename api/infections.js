@@ -89,6 +89,8 @@ router.post('/infected/locations', (req, res) => {
     console.log(coords)
     let alreadyAddedToCity = false;
 
+    city = city.trim()
+
     if (!isEmpty(coords) && coords.length > 0 && ObjectId.isValid(userId)) {
         User.findById(userId)
             .then(user => {
