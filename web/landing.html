@@ -2,92 +2,197 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
 
     <title> COVNET - An anonymous contact tracing system </title>
-    <meta name="Description" CONTENT="Covnet informs you if you have been in close contact with another user who have been diagnosed with the virus to help you get tested early and self-isolate to avoid further spread.">
+    <meta name="Description" CONTENT="It informs you if you have been in close contact with a COVID-19 case and show you where the interaction may have occurred. You can view infected locations within 1 kilometer from where you are and were 2 hours ago.">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;400;500;600;800&display=swap" rel="stylesheet">
 
     <style>
-        .header {
-            margin-top: 35px;
-            margin-bottom: 35px;
-            padding: 5px;
+        body {
+            font-family: 'Poppins', sans-serif;
+        }
+
+        .bg1 {
+            background: linear-gradient(to bottom, #adcaff, #edfffa) /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+        }
+
+        .bg3 {
+            background: linear-gradient(to left, #adcaff, #e6fdf6) /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+        }
+
+        .bg5 {
+            background: linear-gradient(to top, #adcaff, #e6fdf6) /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+        }
+
+        .top {
+            margin-top: 300px;
+            margin-bottom: 100px;
+            color:rgb(84, 141, 179);
+            text-align: center;
+        }
+
+        .heading {
+            font-size: 40px;
+        }
+
+        .top2 {
+            margin-top: 150px;
+            margin-bottom: 150px;
+        }
+
+        .top3 {
+            margin-top: 150px;
+            margin-bottom: 50px;
+        }
+        
+        .brandTop {
+            margin-top: 50px;
+        }
+
+        .covnet {
+            font-size: 90px;
+            font-weight: 600;
+        }
+
+        span, p {
+            font-weight: 200;
+        }
+
+        .brand {
+            width: 600px;
+            margin-top: -200px;
+        }
+
+        .brandX {
+            width: 400px;
+        }
+     
+        .img {
+            width: 200px;
+            text-align: center;
+        }
+
+        .demo {
+            text-align: center;
+        }
+
+        .mt {
+            text-align: center;
+            margin-bottom: 50px;
         }
 
         .footer {
-            margin-top: 25px;
+            text-align: center;
             margin-bottom: 100px;
         }
-        
-        .row {
-            margin-top: 25px;
+
+        .item-preview {
+            position: relative;
         }
-        .img {
-            width: 200px;
+
+        .item-preview img.item-preview-img {
+            transform: translateY(-0.25rem);
+            border-radius: .5rem;
+            overflow: hidden;
+            box-shadow: 0 2rem 17rem 2rem rgba(181, 243, 255, 0.68), 0 0 1.5rem 3rem rgba(255, 255, 255, 0.45);
         }
-        .mt {
-            margin-bottom: 50px;
-        }
+
     </style>
   </head>
-  <body style="background-color: #eee;">
-    <div class="container">
-        <div class="row">
-            <div class="col">
-                <div class="header">
-                    <h1>COVNET</h1>
-                    <span>An anonymous contact tracing system</span>
+  <body>
+    <div class="container-fluid">
+        <div class="row bg1">
+            <div class="container">
+                <div class="row top">
+                    <div class="col-sm">
+                        <img class="brand" src="/imgs/logo.png"/>
+                    </div>
+                </div>  
+            </div>
+        </div>
+
+        <div class="row bg2">
+            <div class="container">
+                <div class="row top2">
+                    <div class="col">
+                        <h3 class="heading">Inspiration</h3>
+                        <p>
+                            The rapid transmission of the coronavirus COVID-19 has led to a sudden lack of information of whether or not a user has been in close contact with a COVID-19 case; have they become infected with the virus or have they become a carrier for it? So we decided to make an app that tracks this kind of information anonymously.
+                        </p>
+                    </div>
+                    <div class="col-sm-4">
+                        <div class="demo item-preview">
+                            <img class="item-preview-img img" src="/imgs/3.png"/>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
 
-        <div class="row">
-            <div class="col">
-                <div class="demo">
-                    <img class="img" src="/imgs/2.png"/>
-                    <img class="img" src="/imgs/3.png"/>
-                    <img class="img" src="/imgs/4.png"/>
-                    <img class="img" src="/imgs/5.png"/>
-                    <img class="img" src="/imgs/6.png"/>
+        <div class="row bg3">
+            <div class="container">
+                <div class="row top2">
+                    <div class="col-sm-4">
+                        <div class="demo">
+                            <img class="img" src="/imgs/4.png"/>
+                        </div>
+                    </div>
+                    <div class="col">
+                        <h3 class="heading">What it is </h3>
+                        <p>
+                            It informs you if you have been in close contact with a COVID-19 case and show you where the interaction may have occurred. You can view infected locations within 1 kilometer from where you are and were 2 hours ago.
+                       </p> 
+                    </div>
                 </div>
             </div>
         </div>
+
+        <div class="row bg4">
+            <div class="container">
+                <div class="row top3">
+                    <div class="col">
+                        <h3 class="heading">How does the app know who has the virus? </h3>
+                        <p>
+                            The app uses GPS to record your location data (anonymously), all the data is stored within your device. If a person gets tested positive, they have the option to provide their <u>unique identification number</u> to the health authorities to let the system know that they have tested positive. Again this is anonymous, we have no idea who they were. 
+                        </p>
+                        <p>
+                            The system will then capture the infected user location data from the past 2 weeks to use for contact tracing. Users who were in close contact with the infected case will get notifed and be able to view when and where it happened.
+                        </p>
+                    </div>
+                    <div class="col-sm-4">
+                        <div class="demo item-preview">
+                            <img class="item-preview-img img" src="/imgs/5.png"/>
+                        </div>
+                    </div>  
+                </div>
+            </div>
+        </div>
+
+        <div class="row bg5">
+            <div class="container">
+                <div class="row brandTop">
+                    <div class="col">
+                        <div class="demo">
+                            <img class="brandX" src="/imgs/brand.png"/>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="container">
+                <div class="row mt">
+                    <div class="col">
+                        <h3 class="heading"> Try it out </h3>
+                        <span>The app is built for both IOS and Android and is currently being tested.</span>
+                        <br/> <br/>
+                        <a href="https://github.com/samikhalildev/COVNET" target=”_blank” class="btn btn-info mt" role="button">Project</a> 
+                        <a href="mailto:sam@realitything.com?Subject=Covnet" class="btn btn-danger mt" role="button" target="_top">Send email</a>
         
-        <div class="row">
-            <div class="col">
-                <h3>Inspiration</h3>
-                <p>
-                    The rapid transmission of the coronavirus COVID-19 has led to a sudden lack of information of whether or not a user has been in close contact with a COVID-19 case; have they become infected with the virus or have they become a carrier for it? So we decided to make an app that tracks this kind of information anonymously.
-                </p>
+                        <!--<a href="/portal" class="btn btn-secondary mt" target=”_blank” role="button">Portal</a> -->
+                    </div>  
+                </div>
             </div>
-        </div>
-
-        <div class="row">
-            <div class="col">
-                <h3>What it does </h3>
-                <p>
-                    It informs you if you have been in close contact with a COVID-19 case and show you where the interaction may have occurred. You can view infected locations within 100 meters from where you are and were 2 hours ago.
-                <p>
-                    How does the app know who has the virus? The app uses GPS to record your location data (anonymously), all the data is stored within your device. If a person gets tested positive, they have the option to provide their <u>unique identification number</u> to the health authorities to let the system know that they have tested positive. Again this is anonymous, we have no idea who they were. 
-                </p>
-                <p>
-                    The system will then capture the infected user location data from the past 2 weeks to use for contact tracing. Users who were in close contact with the infected case will get notifed and be able to view when and where it happened.
-                </p>
-            </div>
-        </div>
-
-        <div class="row mt">
-            <div class="col">
-                <h3> Try it out </h3>
-                <span>The app is built for both IOS and Android and is currently being tested.</span>
-                <br/> <br/>
-                <a href="https://github.com/samikhalildev/COVNET" target=”_blank” class="btn btn-info mt" role="button">Project</a> 
-                <a href="mailto:sam@realitything.com?Subject=Covnet" class="btn btn-danger mt" role="button" target="_top">Send email</a>
-
-                <!--<a href="/portal" class="btn btn-secondary mt" target=”_blank” role="button">Portal</a> -->
-            </div>  
         </div>
     </div>
      <!-- Global site tag (gtag.js) - Google Analytics -->
