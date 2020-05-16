@@ -35,7 +35,7 @@ require('./config/passport')(passport);
 
 // Routing
 app.get('/', (req, res) => {
-    if (req.hostname.includes('heroku')) {
+    if (req.hostname.includes('heroku') || req.hostname.includes('covnet') && req.protocol === 'https') {
         res.redirect('http://covnet.tech');
     } else {
         res.sendFile(path.resolve(__dirname, 'web', 'landing.html'))
