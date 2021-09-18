@@ -35,11 +35,7 @@ require('./config/passport')(passport);
 
 // Routing
 app.get('/', (req, res) => {
-    if (req.hostname.includes('heroku')) {
-        res.redirect('https://covnet.tech');
-    } else {
-        res.sendFile(path.resolve(__dirname, 'web', 'landing.html'))
-    }
+    res.sendFile(path.resolve(__dirname, 'web', 'landing.html'))
 })
 
 // app.get('/portal', (req, res) => {
